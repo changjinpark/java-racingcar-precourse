@@ -20,4 +20,14 @@ public class ValidationUtilsTest {
         String[] carNameArray = "Audi,BMW,Kia,tesla".split(",");
         assertThat(ValidationUtils.validationNameLength(carNameArray)).isTrue();
     }
+
+    @Test
+    @DisplayName("자동차가 2대 미만일 경우, false 반환하며 [ERROR] 시작 메세지 출력")
+    void 자동차가_2대_미만_입력() {
+        String[] carNameArray = "Audi".split(",");
+        assertThat(ValidationUtils.validationNumberOfCars(carNameArray)).isFalse();
+
+        carNameArray = "".split(",");
+        assertThat(ValidationUtils.validationNumberOfCars(carNameArray)).isFalse();
+    }
 }
