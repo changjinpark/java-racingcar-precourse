@@ -26,6 +26,17 @@ public class Cars {
         return carList;
     }
 
+    public List<Car> cars() {
+        return this.cars;
+    }
+
+    public void startRacing() {
+        for (Car car : this.cars) {
+            RandomDecimalNumber randomDecimalNumber = new RandomDecimalNumber();
+            car.move(randomDecimalNumber);
+        }
+    }
+
     private void validateCarName(String[] carNamesArr) {
         if(!validationNameLength(carNamesArr)) {
             printErrorMessage(ERROR_MESSAGE_LENGTH);
