@@ -3,6 +3,8 @@ package racinggame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValidationUtilsTest {
@@ -29,5 +31,12 @@ public class ValidationUtilsTest {
 
         carNameArray = "".split(",");
         assertThat(ValidationUtils.validationNumberOfCars(carNameArray)).isFalse();
+    }
+
+    @Test
+    @DisplayName("자동차 이름이 중복된 값이 있을 경우, false 반환하며 [ERROR] 시작 메세지 출력")
+    void 자동차가_중복_입력() {
+        String[] carNameArray = "Audi,BMW,Kia,Audi,tesla".split(",");
+        assertThat(ValidationUtils.validationNonDuplicate(Arrays.asList(carNameArray))).isFalse();
     }
 }
