@@ -13,6 +13,7 @@ public class ValidationUtils {
     public static final String ERROR_MESSAGE_LENGTH = "[ERROR] 자동차 이름은 5글자 이하만 가능합니다.";
     public static final String ERROR_MESSAGE_MINIMUM_NUMBER = "[ERROR] 자동차는 최소 2대 이상이어야 게임이 가능합니다.";
     public static final String ERROR_MESSAGE_DUPLICATE = "[ERROR] 자동차 이름은 중복되지 않아야 게임이 가능합니다.";
+    public static final String ERROR_MESSAGE_NOT_POSITIVE_NUMBER = "[ERROR] 라운드 값은 양의 정수만 가능합니다.";
 
     public static boolean validationNameLength(String[] carNameArray) {
         int i = 0;
@@ -43,6 +44,19 @@ public class ValidationUtils {
         Set<String> carSet = new HashSet<>(carList);
         if(carSet.size() != carList.size()) {
             printErrorMessage(ERROR_MESSAGE_DUPLICATE);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validationPositive(String round) {
+        try {
+            if(Integer.parseInt(round) <= 0) {
+                printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
             return false;
         }
         return true;
