@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static view.OutputView.printErrorMessage;
-
 public class ValidationUtils {
 
     public static final int CAR_NAME_LIMIT_LENGTH = 5;
@@ -25,40 +23,19 @@ public class ValidationUtils {
     }
 
     private static boolean validationLength(String carName) {
-        if (carName.length() > CAR_NAME_LIMIT_LENGTH){
-            printErrorMessage(ERROR_MESSAGE_LENGTH);
-            return false;
-        }
-        return true;
+        return carName.length() <= CAR_NAME_LIMIT_LENGTH;
     }
 
     public static boolean validationNumberOfCars(String[] carNameArray) {
-        if (carNameArray.length < CAR_MINIMUM_NUMBER){
-            printErrorMessage(ERROR_MESSAGE_MINIMUM_NUMBER);
-            return false;
-        }
-        return true;
+        return carNameArray.length >= CAR_MINIMUM_NUMBER;
     }
 
     public static boolean validationNonDuplicate(List<String> carList) {
         Set<String> carSet = new HashSet<>(carList);
-        if(carSet.size() != carList.size()) {
-            printErrorMessage(ERROR_MESSAGE_DUPLICATE);
-            return false;
-        }
-        return true;
+        return carSet.size() == carList.size();
     }
 
     public static boolean validationPositive(String round) {
-        try {
-            if(Integer.parseInt(round) <= 0) {
-                printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
-            return false;
-        }
-        return true;
+        return Integer.parseInt(round) > 0;
     }
 }

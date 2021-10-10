@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ValidationUtilsTest {
 
@@ -43,9 +44,18 @@ public class ValidationUtilsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"abc", "-1"})
+    @ValueSource(strings = {"0", "-1", "-3"})
+    @DisplayName("입력한 라운드 값이 양의 정수가 아닐 경우, false 반환하며 [ERROR] 시작 메세지 출력")
+    void 라운드_양의_정수_아닌_경우(String round) {
+        assertThat(ValidationUtils.validationPositive(round)).isFalse();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "a", "d"})
     @DisplayName("입력한 라운드 값이 양의 정수가 아닐 경우, false 반환하며 [ERROR] 시작 메세지 출력")
     void 라운드_숫자_아닌_경우(String round) {
-        assertThat(ValidationUtils.validationPositive(round)).isFalse();
+        assertThatThrownBy(() -> {
+            Integer.parseInt(round);
+        }).isInstanceOf(NumberFormatException.class);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import static racinggame.ValidationUtils.*;
 import static view.InputView.userInputCarName;
+import static view.OutputView.printErrorMessage;
 
 public class Cars {
     private final List<Car> cars;
@@ -26,7 +27,16 @@ public class Cars {
     }
 
     private void validateCarName(String[] carNamesArr) {
-        if(!validationNameLength(carNamesArr) || !validationNumberOfCars(carNamesArr) || !validationNonDuplicate(Arrays.asList(carNamesArr))) {
+        if(!validationNameLength(carNamesArr)) {
+            printErrorMessage(ERROR_MESSAGE_LENGTH);
+            userInputCarName();
+        }
+        if(!validationNumberOfCars(carNamesArr)) {
+            printErrorMessage(ERROR_MESSAGE_MINIMUM_NUMBER);
+            userInputCarName();
+        }
+        if(!validationNonDuplicate(Arrays.asList(carNamesArr))) {
+            printErrorMessage(ERROR_MESSAGE_DUPLICATE);
             userInputCarName();
         }
     }
