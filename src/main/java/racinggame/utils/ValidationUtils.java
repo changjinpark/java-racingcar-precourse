@@ -1,8 +1,10 @@
-package racinggame;
+package racinggame.utils;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static view.OutputView.printErrorMessage;
 
 public class ValidationUtils {
 
@@ -36,6 +38,20 @@ public class ValidationUtils {
     }
 
     public static boolean validationPositive(String round) {
-        return Integer.parseInt(round) > 0;
+        if (Integer.parseInt(round) <= 0) {
+            printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validationDigit(String round) {
+        try {
+            Integer.parseInt(round);
+        } catch (NumberFormatException e) {
+            printErrorMessage(ERROR_MESSAGE_NOT_POSITIVE_NUMBER);
+            return false;
+        }
+        return true;
     }
 }

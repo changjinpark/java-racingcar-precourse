@@ -1,5 +1,6 @@
-package racinggame;
+package racinggame.utils;
 
+import racinggame.utils.ValidationUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,8 +55,6 @@ public class ValidationUtilsTest {
     @ValueSource(strings = {"abc", "a", "d"})
     @DisplayName("입력한 라운드 값이 양의 정수가 아닐 경우, false 반환하며 [ERROR] 시작 메세지 출력")
     void 라운드_숫자_아닌_경우(String round) {
-        assertThatThrownBy(() -> {
-            Integer.parseInt(round);
-        }).isInstanceOf(NumberFormatException.class);
+        assertThatThrownBy(() -> Integer.parseInt(round)).isInstanceOf(NumberFormatException.class);
     }
 }
