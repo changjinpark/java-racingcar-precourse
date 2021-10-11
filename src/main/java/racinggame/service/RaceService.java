@@ -14,4 +14,7 @@ public class RaceService {
         }
         this.cars = cars;
     }
+    public void showWinners() {
+        printWinners(cars.findWinners());
+    }
 }

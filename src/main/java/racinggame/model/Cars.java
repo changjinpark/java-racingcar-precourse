@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static racinggame.ValidationUtils.*;
+import static racinggame.utils.ValidationUtils.*;
 import static view.InputView.userInputCarName;
 import static view.OutputView.printErrorMessage;
 
@@ -15,6 +15,10 @@ public class Cars {
         String[] carNamesArr = inputCarNames.split(",");
         validateCarName(carNamesArr);
         this.cars = makeCars(carNamesArr);
+    }
+
+    public Cars(List<Car> cars) {
+        this.cars = cars;
     }
 
     private List<Car> makeCars(String[] carNamesArr) {
@@ -50,5 +54,27 @@ public class Cars {
             printErrorMessage(ERROR_MESSAGE_DUPLICATE);
             userInputCarName();
         }
+    }
+
+    public List<Car> findWinners() {
+        List<Car> winners = new ArrayList<>();
+        Position firstCarPosition = this.getFirstPosition();
+        for (Car car : cars) {
+            if (car.isWinner(firstCarPosition)) {
+                winners.add(car);
+            }
+        }
+        return winners;
+    }
+
+    private Position getFirstPosition() {
+        Position maxPosition = new Position();
+        for (Car car : cars) {
+            Position carPosition = car.position();
+            if (carPosition.isBiggerThan(maxPosition)) {
+                maxPosition = car.position();
+            }
+        }
+        return maxPosition;
     }
 }

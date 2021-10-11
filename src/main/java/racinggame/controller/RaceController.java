@@ -14,5 +14,6 @@ public class RaceController {
         int inputRaceCount = raceCount.raceCount();
         RaceService raceService = new RaceService();
         raceService.start(inputRaceCount, cars);
+        raceService.showWinners();
     }
 }

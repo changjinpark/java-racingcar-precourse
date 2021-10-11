@@ -10,6 +10,11 @@ public class Car {
         this.position = new Position(INIT_POSITION);
     }
 
+    public Car(String carName, Position position) {
+        this.carName = carName;
+        this.position = position;
+    }
+
     public void move(RandomWay randomWay) {
         if (randomWay.movable()) {
             position.move();
@@ -22,5 +27,9 @@ public class Car {
 
     public Position position() {
         return this.position;
+    }
+
+    public boolean isWinner(Position maxPosition) {
+        return position.isSamePosition(maxPosition);
     }
 }
